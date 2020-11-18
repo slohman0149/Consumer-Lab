@@ -170,19 +170,23 @@ public class Review {
   public static double totalSentiment(String filename)
   {
     // read in the file contents into a string using the textToString method with the filename
-
+    String reviewSent = textToString(filename);
     // set up a sentimentTotal variable
     double sentimentTotal = 0;
-
+    int fileLen = reviewSent.length();
+    while (fileLen >= 0)
+    {
     // loop through the file contents 
-
-       // find each word
-       // add in its sentimentVal
-       // set the file contents to start after this word
+    // find each word
+    // add in its sentimentVal
+    // set the file contents to start after this word
+        int index = reviewSent.indexOf(" ");
+        String word = reviewSent.substring(0, index + 1);
+        sentimentTotal = sentimentTotal + Review.sentimentVal(word);
+        reviewSent = reviewSent.substring(index + 1,fileLen);
+        fileLen = reviewSent.length();
+    }
    
-   
-
-
 
    return sentimentTotal; 
   }
@@ -204,4 +208,8 @@ public class Review {
     // return number of stars
     return stars; 
   }
+  public static void Activity1(String word)
+  {
+      System.out.println(Review.sentimentVal("awesome"));
+    }
 }
