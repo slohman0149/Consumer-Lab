@@ -174,13 +174,13 @@ public class Review {
     // set up a sentimentTotal variable
     double sentimentTotal = 0;
     int fileLen = reviewSent.length();
-    while (fileLen >= 0)
+    int index = reviewSent.indexOf(" ");
+    while (index >= 0)
     {
     // loop through the file contents 
     // find each word
     // add in its sentimentVal
     // set the file contents to start after this word
-        int index = reviewSent.indexOf(" ");
         String word = reviewSent.substring(0, index + 1);
         sentimentTotal = sentimentTotal + Review.sentimentVal(word);
         reviewSent = reviewSent.substring(index + 1,fileLen);
@@ -208,8 +208,17 @@ public class Review {
     // return number of stars
     return stars; 
   }
-  public static void Activity1(String word)
+  public static String fakeReview(String fileName)
   {
-      System.out.println(Review.sentimentVal("awesome"));
-    }
+      String fileStr = textToString(fileName);
+      int lenFile = fileStr.length();
+      int indexAst = fileStr.indexOf("*");
+      while (indexAst >= 0) 
+      {
+          String before = fileStr.substring(indexAst + 1, lenFile + 1);
+          int indexSpace = before.indexOf(" ");
+          String oldAdj = fileStr.substring(indexAst + 1, indexSpace);
+          String newAdj = randomPositiveAdj();
+      }
+  }
 }
