@@ -198,27 +198,46 @@ public class Review {
   public static int starRating(String filename)
   {
     // call the totalSentiment method with the fileName
-
+    double totalSentiment = totalSentiment(filename);
     // determine number of stars between 0 and 4 based on totalSentiment value 
     int stars = 0; // change this!
     // write if statements here
-
-
-  
+    if (totalSentiment > 15)
+    {
+        stars = 4;
+    }
+    else if (totalSentiment <= 15 && totalSentiment > 10)
+    {
+        stars = 3;
+    }
+    else if (totalSentiment <= 10 && totalSentiment > 5)
+    {
+        stars = 2;
+    }
+    else if (totalSentiment <= 5 && totalSentiment > 0)
+    {
+        stars = 1;
+    }
+    else
+    {
+        stars = 0;
+    }
     // return number of stars
     return stars; 
   }
   public static String fakeReview(String fileName)
   {
-      String fileStr = textToString(fileName);
-      int lenFile = fileStr.length();
-      int indexAst = fileStr.indexOf("*");
+      String fakeStr = textToString(fileName);
+      int lenFile = fakeStr.length();
+      int indexAst = fakeStr.indexOf("*");
       while (indexAst >= 0) 
       {
-          String before = fileStr.substring(indexAst + 1, lenFile + 1);
-          int indexSpace = before.indexOf(" ");
-          String oldAdj = fileStr.substring(indexAst + 1, indexSpace);
-          String newAdj = randomPositiveAdj();
+          String wFront = fakeStr.substring(0, indexAst);
+          int indexSpace = wFront.indexOf(" ");
+          String wOutAdj = wFront.substring(indexSpace, lenFile + 1);
+          String newAdj = randomAdjective();
+          fakeStr = (wFront + newAdj + wOutAdj);
       }
+      return fakeStr;
   }
 }
